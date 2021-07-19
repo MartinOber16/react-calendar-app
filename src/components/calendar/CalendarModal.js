@@ -5,7 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActive, eventUpdated } from '../../actions/events';
+import { eventClearActive, eventStartAddNew, eventStartUpdated } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -51,6 +51,8 @@ export const CalendarModal = () => {
     useEffect(() => {
         if( activeEvent ) {
             setFormValues( activeEvent );
+            setDateStart( moment( activeEvent.start ).toDate() );
+            setDateEnd( moment( activeEvent.end ).toDate() ); 
         } else {
             setFormValues( initEvent );
         }
@@ -104,19 +106,10 @@ export const CalendarModal = () => {
             return setTitleValid(false);
         }
 
-        // TODO: Realizar grabacion en BD
-
         if( activeEvent ) {
-            dispatch( eventUpdated( formValues ) );
+            dispatch( eventStartUpdated( formValues ) );
         } else {
-            dispatch( eventAddNew({
-                ...formValues,
-                id: new Date().getTime(), // Temporalmente para generar un ID
-                user: {
-                    _id: '123',
-                    name: 'Martin'
-                }
-            }) );
+            dispatch( eventStartAddNew( formValues ) );
         }
 
         setTitleValid(true);

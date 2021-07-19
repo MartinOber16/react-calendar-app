@@ -9,9 +9,7 @@ export const Navbar = () => {
     const { name } = useSelector( state => state.auth );
 
     const handleLogout = ( e ) => {
-
         e.preventDefault();
-
         dispatch( startLogout() );
     }
 
