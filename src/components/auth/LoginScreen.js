@@ -27,7 +27,6 @@ export const LoginScreen = () => {
 
     const handleLogin = ( e ) => {
         e.preventDefault();
-
         dispatch( startLogin( lEmail, lPassword ) );
     }
 
@@ -105,7 +104,7 @@ export const LoginScreen = () => {
                                 type="password"
                                 className="form-control"
                                 placeholder="Contraseña" 
-                                name="rPasssword1"
+                                name="rPassword1"
                                 value={ rPassword1 }
                                 onChange={ handleRegisterInputChange }
                             />
